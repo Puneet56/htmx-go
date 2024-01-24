@@ -1,6 +1,7 @@
 package main
 
 import (
+	users "htmxgo/handlers"
 	"htmxgo/views/home"
 
 	"github.com/labstack/echo/v4"
@@ -14,5 +15,6 @@ func main() {
 		return home.Home().Render(c.Request().Context(), c.Response().Writer)
 	})
 
+	e.GET("/users", users.GetUsers)
 	e.Logger.Fatal(e.Start(":1323"))
 }
