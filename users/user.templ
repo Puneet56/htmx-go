@@ -1,0 +1,42 @@
+package users
+
+import (
+	"fmt"
+	"htmxgo/views/layout"
+)
+
+templ UserRow(u User) {
+	<tr id={ fmt.Sprint(u.Id) }>
+		<td>{ fmt.Sprint(u.Id) }</td>
+		<td>{ u.Name }</td>
+		<td>{ u.Email }</td>
+	</tr>
+}
+
+templ UsersTable(users []User) {
+	<div class="card-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Email</th>
+				</tr>
+			</thead>
+			<tbody>
+				for _, u := range users {
+					@UserRow(u)
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+templ UsersIndex(users []User) {
+	@layout.Base("Users") {
+		<div class="p-8">
+			<h1 class="text-3xl font-bold">Projects</h1>
+			@UsersTable(users)
+		</div>
+	}
+}

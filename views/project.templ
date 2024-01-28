@@ -1,0 +1,43 @@
+package views
+
+import (
+	"fmt"
+	"htmxgo/views/layout"
+	"htmxgo/types"
+)
+
+templ ProjectRow(p types.Project) {
+	<tr id={ fmt.Sprint(p.Id) }>
+		<td>{ fmt.Sprint(p.Id) }</td>
+		<td>{ p.Name }</td>
+		<td>{ p.Description }</td>
+	</tr>
+}
+
+templ ProjectsTable(projects []types.Project) {
+	<div class="card-body">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Name</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				for _, p := range projects {
+					@ProjectRow(p)
+				}
+			</tbody>
+		</table>
+	</div>
+}
+
+templ ProjectsPage(projects []types.Project) {
+	@layout.Base("Projects") {
+		<div class="p-8">
+			<h1 class="text-3xl font-bold">Projects</h1>
+			@ProjectsTable(projects)
+		</div>
+	}
+}
